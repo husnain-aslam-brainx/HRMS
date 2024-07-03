@@ -1,0 +1,7 @@
+<h1> hey im edit here </h1>
+<%= form_with model: @position, url: position_path(@position), method: :put do |form| %>
+<%= form.text_field :description%>
+<%= form.select :title, ["SE","SQA"]%>
+<%= form.select :status, ["open","close"]%>
+<%= form.submit "Update"%>
+<%end%>
