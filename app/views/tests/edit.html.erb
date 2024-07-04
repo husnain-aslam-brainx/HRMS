@@ -1,0 +1,5 @@
+<%= form_with model:@test, url: test_path(@test) do |form|%>
+<%= form.text_field :description%>
+<%= form.file_field :assessent%>
+<%= form.submit "Update"%>
+<%end%>
