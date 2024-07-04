@@ -1,0 +1,9 @@
+<%= form_with model: @candidate, url: candidate_path(@candidate), mehtod: :put do |form|%>
+Name<%= form.text_field :name %>
+Email<%= form.text_field :email%>
+Address<%= form.text_field :address%>
+Phone<%= form.text_field :phone%>
+Image<%= form.file_field :profile%>
+Resume<%= form.file_field :resume%>
+<%= form.submit "Update candidate"%>
+<%end%>
