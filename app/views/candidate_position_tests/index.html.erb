@@ -1,0 +1,30 @@
+<%= link_to "Create new record", new_candidate_position_test_path%>
+<% @candidate_position_tests.each do |candidate_position_test| %>
+<div>
+<div>
+<%= candidate_position_test.candidate.name%>
+</div>
+<div>
+<%= candidate_position_test.candidate.email%>
+</div>
+<div>
+<%= link_to rails_blob_path( candidate_position_test.candidate.resume), target: "_blank" do%>
+<%= "Resume"%>
+<%end%>
+</div>
+<div>
+<%= candidate_position_test.test.description%>
+</div>
+<div>
+<%= link_to rails_blob_path( candidate_position_test.test.assessment), target: "_blank" do%>
+<%= "Test"%>
+<%end%>
+</div>
+<div>
+<%= candidate_position_test.position.title%>
+</div>
+<div>
+<%= candidate_position_test.position.description%>
+</div>
+</div>
+<%end%>

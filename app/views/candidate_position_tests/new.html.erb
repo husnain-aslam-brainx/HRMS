@@ -1,0 +1,9 @@
+<%= form_with model: @candidate_position_test, url: candidate_position_tests_path, method: :post do |form| %>
+  Status
+  <%= form.select :status, options_for_select(["assigned", "attempted"]) %>
+  <%= form.select :candidate, options_for_select(@candidates) %>
+  <%= form.select :test, options_for_select(@tests) %>
+  <%= form.select :position, options_for_select(@positions) %>
+  <%= form.select :result, options_for_select(["pass","fail"]) %>
+  <%= form.submit "Create Entry" %>
+<% end %>
