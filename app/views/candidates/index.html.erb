@@ -1,0 +1,19 @@
+<%= link_to "Create Candidate", new_candidate_path%>
+<% @candidates.each do |candidate| %>
+  <div>
+    <div><%= candidate.name %></div>
+    <div><%= candidate.email %></div>
+    <div><%= candidate.address %></div>
+    <div><%= candidate.phone %></div>
+    <div><%= image_tag candidate.profile %></div>
+    <div>
+        <%= link_to rails_blob_path(candidate.resume, disposition: "inline"), target: "_blank" do %>
+        <%= "Resume" %>
+        <% end %>
+    </div>
+    <div>
+    <%= link_to "Edit", edit_candidate_path(candidate)%>
+    </div>
+    <div><%= link_to "Delete", candidate_path(candidate), data: { "turbo-method": :delete } %></div>
+  </div>
+<% end %>
