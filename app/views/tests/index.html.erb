@@ -1,0 +1,12 @@
+<%= link_to "New Test", new_test_path%>
+<% @tests.each do |test|%>
+<div>
+<div><%= test.description%></div>
+<div><%= link_to rails_blob_path(test.assessment, disposition: "inline"), target: "_blank" do%>
+<%= "Assesment"%>
+<%end%>
+</div>
+<div><%=link_to "Edit", edit_test_path(test)%></div>
+<div><%= link_to "Delete", test_path(test), data:{"turbo-method": :delete} %> <div>
+</div>
+<%end%>
