@@ -9,7 +9,6 @@ Candidate.delete_all
 Position.delete_all
 Test.delete_all
 
-
 # Create Users (assuming you have some users for testing purposes)
 # Create Positions
 positions = Position.create!([
@@ -20,11 +19,30 @@ positions = Position.create!([
 ])
 
 # Create Tests
-tests = Test.create!([
-  { description: "Ruby on Rails assessment" },
-  { description: "Software Quality Assurance test" },
-  { description: "React proficiency test" }
-])
+tests = [
+  {
+    description: "Ruby on Rails assessment",
+    assessment_path: "/Users/brainxror/Training/HRMS/app/assets/pdfs/test.pdf"
+  },
+  {
+    description: "Software Quality Assurance test",
+    assessment_path: "/Users/brainxror/Training/HRMS/app/assets/pdfs/test.pdf"
+  },
+  {
+    description: "React proficiency test",
+    assessment_path: "/Users/brainxror/Training/HRMS/app/assets/pdfs/test.pdf"
+  }
+]
+
+tests.each_with_index do |test_data, index|
+  test = Test.create!(description: test_data[:description])
+
+  test.assessment.attach(
+    io: File.open(test_data[:assessment_path]),
+    filename: "assessment#{index + 1}.pdf",
+    content_type: "application/pdf"
+  )
+end
 
 # Create Candidates with Active Storage attachments
 candidates = [
@@ -73,7 +91,7 @@ end
 CandidatePositionTest.create!([
   { candidate: Candidate.first, test: Test.first, position: Position.first, status: 0, result: 0 },
   { candidate: Candidate.second, test: Test.second, position: Position.first ,status: 1, result: 1 },
-  { candidate: Candidate.first,  test: Test.second, position: Position.first, status: 1, result: 1 },
+  { candidate: Candidate.first, test: Test.second, position: Position.first, status: 1, result: 1 },
   { candidate: Candidate.second, test: Test.second, position: Position.first, status: 1, result: 0 }
 ])
 
