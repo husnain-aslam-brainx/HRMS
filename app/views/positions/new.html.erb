@@ -1,5 +1,5 @@
 <%= form_with model: @position,  url: positions_path do |form|%>
-<%= form.text_field :description%>
+Description<%= form.text_field :description%>
 <%= form.select :title, ["SE","SQA"]%>
 <%= form.select :status, ["open","close"]%>
 <%= form.submit "Create Position"%>
