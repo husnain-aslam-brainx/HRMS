@@ -26,5 +26,11 @@
 <div>
 <%= candidate_position_test.position.description%>
 </div>
+<div>
+<%= link_to "Edit", edit_candidate_position_test_path(candidate_position_test)%>
+</div>
+<div>
+<%= link_to "Delete", candidate_position_test_path(candidate_position_test), data: {"turbo-method": :delete} %>
+</div>
 </div>
 <%end%>
