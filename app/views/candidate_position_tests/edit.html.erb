@@ -1,9 +1,9 @@
-<%= form_with model: @candidate_position_test, url: candidate_position_tests_path, method: :post do |form| %>
+<%= form_with model: @candidate_position_test, url: candidate_position_test_path(@candidate_position_test), method: :put do |form| %>
   Status
   <%= form.select :status, options_for_select(["assigned", "attempted"]) %>
   <%= form.select :candidate, options_from_collection_for_select(@candidates,:id,:name) %>
   <%= form.select :test, options_from_collection_for_select(@tests,:id,:description) %>
   <%= form.select :position, options_from_collection_for_select(@positions,:id,:title) %>
   <%= form.select :result, options_for_select(["pass","fail"]) %>
-  <%= form.submit "Create Entry" %>
+  <%= form.submit "Update" %>
 <% end %>
