@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :interviews
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
   resources :candidates
   resources :tests
   resources :candidate_position_tests
+  root "candidates#index"
 
   # Defines the root path route ("/")
   # root "posts#index"

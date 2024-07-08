@@ -1,4 +1,8 @@
+
 <%= link_to "Add position", new_position_path %>
+<p class="text-3xl font-bold underline">
+    Hello world!
+</p>
 <% @positions.each do |position| %>
   <div>
     <p>Description: <%= position.description %></p>
@@ -8,3 +12,4 @@
     <%= link_to "Delete", position_path(position), data: { "turbo-method": :delete } %>
   </div>
 <% end %>
+

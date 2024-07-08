@@ -1,5 +1,15 @@
-<%= form_with model:@test, url: test_path(@test) do |form|%>
-<%= form.text_field :description%>
-<%= form.file_field :assessent%>
-<%= form.submit "Update"%>
-<%end%>
+<%= form_with model: @test, url: test_path(@test), method: :patch do |form| %>
+  <div>
+    <%= form.label :description, "Description" %>
+    <%= form.text_field :description%>
+  </div>
+
+  <div>
+    <%= form.label :assessment, "Assessment" %>
+    <%= form.file_field :assessment%>
+  </div>
+
+  <div>
+    <%= form.submit "Update" %>
+  </div>
+<% end %>

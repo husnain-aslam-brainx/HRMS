@@ -1,0 +1,15 @@
+<h1>Interviews</h1>
+
+<div id="interviews">
+  <% @interviews.each do |interview| %>
+    <%= render interview %>
+    <p>
+      <%= link_to "Edit", edit_interview_path(interview)%>
+    </p>
+    <p>
+      <%= button_to "Destroy this interview", interview, method: :delete %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New interview", new_interview_path %>

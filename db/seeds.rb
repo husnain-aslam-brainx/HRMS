@@ -97,10 +97,10 @@ CandidatePositionTest.create!([
 
 # Create interviews
 Interview.create!([
-  { interview_type: 0, candidate_position_test: CandidatePositionTest.first, interviewer: "Ali" },
-  { interview_type: 1, candidate_position_test: CandidatePositionTest.first, interviewer: "Ahmad" },
-  { interview_type: 0, candidate_position_test: CandidatePositionTest.fourth, interviewer: "Ali" },
-  { interview_type: 1, candidate_position_test: CandidatePositionTest.fourth, interviewer: "Ali" }
+  { interview_type: 0, candidate_position_test: CandidatePositionTest.first, interviewer: "Ali" , result: 0},
+  { interview_type: 1, candidate_position_test: CandidatePositionTest.first, interviewer: "Ahmad" , result: 0},
+  { interview_type: 0, candidate_position_test: CandidatePositionTest.fourth, interviewer: "Ali", result: 0 },
+  { interview_type: 1, candidate_position_test: CandidatePositionTest.fourth, interviewer: "Ali" , result: 0}
 ])
 
 puts "Seeding completed successfully!"
