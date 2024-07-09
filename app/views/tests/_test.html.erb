@@ -1,0 +1,16 @@
+<tr>
+<td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><%= test.description %></td>
+<td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+                                            <%= link_to rails_blob_path(test.assessment, disposition: "inline"), target: "_blank" do %>
+                                              <%= "Assessment" %>
+                                               <% end %>
+                                        </button></td>
+<td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+    <%= link_to "Edit", edit_test_path(test)%>
+     </button></td>
+    <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+    <%= button_to "Delete", test, method: :delete, class: "text-red-400 transition-colors duration-200 hover:text-indigo-500 focus:outline-none" %>
+    </td>
+</tr>
+                           
+                        

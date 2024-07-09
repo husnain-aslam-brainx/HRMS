@@ -1,15 +1,1 @@
-<%= form_with model: @test, url: tests_path, method: :post do |form| %>
-  <div>
-    <%= form.label :description, "Description" %>
-    <%= form.text_field :description%>
-  </div>
-
-  <div>
-    <%= form.label :assessment, "Assessment" %>
-    <%= form.file_field :assessment %>
-  </div>
-
-  <div>
-    <%= form.submit "Create"%>
-  </div>
-<% end %>
+<%= render "form", test: @test%>
