@@ -1,0 +1,32 @@
+<tr>
+                                <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                    <div class="flex items-center gap-x-2">
+                                       <%= image_tag candidate_position_test.candidate.profile, class: "rounded-full h-12 w-12" %>
+                                        <div>
+                                            <h2 class="text-sm font-medium text-gray-800 dark:text-white "><%= candidate_position_test.candidate.name%></h2>
+                                            <p class="text-xs font-normal text-gray-600 dark:text-gray-400"><%= candidate_position_test.candidate.email%></p>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                 
+                                  <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+                                            <%= link_to rails_blob_path(candidate_position_test.candidate.resume, disposition: "inline"), target: "_blank" do %>
+                                              <%= "Resume" %>
+                                               <% end %>
+                                        </button></td>
+                                         <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+                                            <%= link_to rails_blob_path(candidate_position_test.test.assessment, disposition: "inline"), target: "_blank" do %>
+                                              <%= "Assessment" %>
+                                               <% end %>
+                                        </button></td>
+                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><%= candidate_position_test.status %></td>
+                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><%= candidate_position_test.result %></td>
+                                 <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+                                            <%= link_to "Edit", edit_candidate_position_test_path(candidate_position_test)%>
+                                        </button></td>
+                                 <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                            <%= button_to "Delete", candidate_position_test, method: :delete, class: "text-red-400 transition-colors duration-200 hover:text-indigo-500 focus:outline-none" %>
+                                        </td>
+                            </tr>
+                        

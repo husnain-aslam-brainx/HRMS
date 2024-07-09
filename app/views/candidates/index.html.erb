@@ -1,5 +1,5 @@
 <div class=" flex justify-end">
-<%= link_to "Create", new_candidate_path , class:" text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800  font-medium rounded-lg text-sm px-2.5 py-2.5 text-center me-5 mb-2 "%></button>
+<%= link_to "Create", new_candidate_path , class:" text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800  font-medium rounded-lg text-sm px-2.5 py-2.5 text-center me-5 mb-2 "%>
 </div>
 <section class="container px-4 mx-auto">
     <div class="flex flex-col">
@@ -61,9 +61,9 @@
                                  <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
                                             <%= link_to "Edit", edit_candidate_path(candidate)%>
                                         </button></td>
-                                 <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><button class="text-red-400 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
-                                            <%= link_to "Delete", candidate_path(candidate), data: { "turbo-method": :delete } %>
-                                        </button></td>
+                                 <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                            <%= button_to "Delete", candidate, method: :delete, class: "text-red-400 transition-colors duration-200 hover:text-indigo-500 focus:outline-none" %>
+                                        </td>
                             </tr>
                             <%end%>
                         </tbody>
