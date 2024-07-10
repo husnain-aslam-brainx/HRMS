@@ -1,3 +1,10 @@
+<div data-controller="submit-on-change">
+  <%= form_with(model: interview, url: new_interview_path, method: :get, local: true, html: { data: { action: "change->submit_on_change#submit" } }) do |form| %>
+    <%= form.select :position, options_for_select(["SQA", "SE"], @default_position), data: { action: "change->submit_on_change#submit" } %>
+  <% end %>
+</div>
+
+
 <%= form_with(model: interview) do |form| %>
   <% if interview.errors.any? %>
     <div style="color: red">
@@ -11,9 +18,11 @@
     </div>
   <% end %>
 
+
   <div>
-    <%= form.label :candidate_position_test_id, style: "display: block" %>
-    <%= form.text_field :candidate_position_test_id %>
+    <%= form.label :candidate_position_test_id  ,style: "display: block" %>
+    <%= form.select :candidate_position_test_id, options_from_collection_for_select(@candidate_position_test || [],:id,:candidate_name) %>
+    
   </div>
 
   <div>
@@ -23,10 +32,15 @@
 
   <div>
     <%= form.label :interview_type, style: "display: block" %>
-    <%= form.number_field :interview_type %>
+    <%= form.select :interview_type, options_for_select(["initial","final"])  %>
+  </div>
+   <div>
+    <%= form.label :interview_type, style: "display: block" %>
+    <%= form.select :result, options_for_select(["passed","failed"])  %>
   </div>
 
   <div>
     <%= form.submit %>
   </div>
 <% end %>
+

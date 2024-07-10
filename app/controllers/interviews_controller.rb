@@ -10,6 +10,15 @@ class InterviewsController < ApplicationController
 
   def new
     @interview = Interview.new
+    @default_position = "SE"
+    @candidate_position_test 
+    if params[:interview] && params[:interview][:position]
+      @default_position = params[:interview][:position]
+      puts "Position: #{params[:interview][:position]}"
+      @candidate_position_test = CandidatePositionTest.where(result: "pass").joins(:candidate).select('candidate_position_tests.*, candidates.name AS candidate_name')
+      @candidate_position_test = @candidate_position_test.where(position_id: Position.where(title: params[:interview][:position]))
+    end
+    puts @candidate_position_test.inspect
   end
 
   def edit
@@ -17,6 +26,7 @@ class InterviewsController < ApplicationController
 
   def create
     @interview = Interview.new(interview_params)
+
 
     respond_to do |format|
       if @interview.save
@@ -55,6 +65,6 @@ class InterviewsController < ApplicationController
     end
 
     def interview_params
-      params.require(:interview).permit(:candidate_position_test_id, :interviewer, :interview_type)
+      params.require(:interview).permit(:candidate_position_test_id, :interviewer, :interview_type,:result)
     end
 end

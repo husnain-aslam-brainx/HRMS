@@ -1,4 +1,4 @@
-<%= form_with model: @candidate_position_test, url: candidate_position_test_path(@candidate_position_test), method: :put do |form| %>
+<%= form_with(model: candidate_position_test) do |form| %>
   <div class="mx-32">
     <div class="border border-gray-600 rounded-2xl p-12">
       <h2 class="text-base font-semibold leading-7 text-gray-900">Candidates Records</h2>
@@ -7,35 +7,35 @@
         <div class="sm:col-span-2">
           <label for="candidate" class="block text-sm font-medium leading-6 text-gray-900">Candidate</label>
           <div class="mt-2">
-            <%= form.select :candidate_id, options_from_collection_for_select(@candidates, :id, :name, @candidate_position_test.candidate_id), class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+            <%= form.select :candidate, options_from_collection_for_select(candidates, :id, :name), class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
           </div>
         </div>
 
         <div class="sm:col-span-2">
           <label for="position" class="block text-sm font-medium leading-6 text-gray-900">Position</label>
           <div class="mt-2">
-            <%= form.select :position_id, options_from_collection_for_select(@positions, :id, :title, @candidate_position_test.position_id), class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+            <%= form.select :position, options_from_collection_for_select(positions, :id, :title), class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
           </div>
         </div>
 
         <div class="sm:col-span-2">
           <label for="test" class="block text-sm font-medium leading-6 text-gray-900">Test</label>
           <div class="mt-2">
-            <%= form.select :test_id, options_from_collection_for_select(@tests, :id, :description, @candidate_position_test.test_id), class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+            <%= form.select :test, options_from_collection_for_select(tests, :id, :description), class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
           </div>
         </div>
 
         <div class="sm:col-span-2">
           <label for="status" class="block text-sm font-medium leading-6 text-gray-900">Status</label>
           <div class="mt-2">
-            <%= form.select :status, options_for_select(["assigned", "attempted"],@candidate_position_test.status), class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+            <%= form.select :status, ["assigned", "attempted"], class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
           </div>
         </div>
 
         <div class="sm:col-span-2">
           <label for="result" class="block text-sm font-medium leading-6 text-gray-900">Result</label>
           <div class="mt-2">
-            <%= form.select :result,options_for_select( ["pass", "fail"], @candidate_position_test.result), class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+            <%= form.select :result, ["pass", "fail"], class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
           </div>
         </div>
 
@@ -49,4 +49,3 @@
     </div>
   </div>
 <% end %>
-
