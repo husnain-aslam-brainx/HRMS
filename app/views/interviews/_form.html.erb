@@ -1,8 +1,12 @@
-<div data-controller="submit-on-change">
-  <%= form_with(model: interview, url: new_interview_path, method: :get, local: true, html: { data: { action: "change->submit_on_change#submit" } }) do |form| %>
-    <%= form.select :position, options_for_select(["SQA", "SE"], @default_position), data: { action: "change->submit_on_change#submit" } %>
+<div data-controller="submit-position-on-change">
+<button data-action="click->submit-position-on-change#alert">Alert</button>
+  <%= form_with(model: interview, url: new_interview_path, method: :get, local: true) do |form| %>
+    <%= form.select :position, options_for_select(["SQA", "SE"], @default_position),{}, data: { action: "change->submit-position-on-change#submit" } %>
   <% end %>
 </div>
+
+
+
 
 
 <%= form_with(model: interview) do |form| %>
