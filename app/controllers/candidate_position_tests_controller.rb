@@ -27,10 +27,10 @@ class CandidatePositionTestsController < ApplicationController
       end
     def update
         @candidate_position_test = CandidatePositionTest.find(params[:id])
-        candidate = Candidate.find(candidate_position_test_params[:candidate])
-        test = Test.find(candidate_position_test_params[:test])
-        position = Position.find(candidate_position_test_params[:position])
-        if @candidate_position_test.update(candidate: candidate,test: test,position: position,status: candidate_position_test_params[:status],result: candidate_position_test_params[:result])
+        candidate = Candidate.find(candidate_position_test_id_params[:candidate_id])
+        test = Test.find(candidate_position_test_id_params[:test_id])
+        position = Position.find(candidate_position_test_id_params[:position_id])
+        if @candidate_position_test.update(candidate: candidate,test: test,position: position,status: candidate_position_test_id_params[:status],result: candidate_position_test_id_params[:result])
             redirect_to candidate_position_tests_path
         else
           @candidates = Candidate.all
@@ -47,5 +47,8 @@ class CandidatePositionTestsController < ApplicationController
 
     def candidate_position_test_params
         params.require(:candidate_position_test).permit(:candidate, :test, :position, :status, :result)
+    end
+    def candidate_position_test_id_params
+        params.require(:candidate_position_test).permit(:candidate_id, :test_id, :position_id, :status, :result)
     end
 end
