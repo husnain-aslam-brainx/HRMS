@@ -1,4 +1,5 @@
 class CandidatesController < ApplicationController
+    before_action :authenticate_user!
     def index
         @candidates = Candidate.all
     end
@@ -11,6 +12,11 @@ class CandidatesController < ApplicationController
     def create
         @candidate = Candidate.new(candidate_params)
         if @candidate.save
+            if params[:candidate][:resumes]
+                params[:candidate][:resumes].each do |resume|
+                  @candidate.resumes.attach(resume)
+                end
+            end
             redirect_to candidates_path
         else 
             render :new
@@ -29,12 +35,15 @@ class CandidatesController < ApplicationController
     end
     def destroy 
         @candidate = Candidate.find(params[:id])
+        @candidate.resumes.each do |resume|
+            resume.purge # This deletes the file from storage
+        end
         if @candidate.destroy
             redirect_to candidates_path
         end
     end
 
     def candidate_params
-        params.require(:candidate).permit(:name,:email,:address,:phone,:profile,:resume)
+        params.require(:candidate).permit(:name,:email,:address,:phone,:profile)
     end
 end

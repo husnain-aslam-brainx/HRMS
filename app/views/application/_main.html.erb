@@ -1,0 +1,23 @@
+<div class="flex flex-col flex-1 overflow-y-auto ">
+<% if user_signed_in?%>
+    <div class="flex justify-end mt-6 me-9">
+        <div class="flex items-center space-x-4">
+            <%= link_to destroy_user_session_path,  class: "flex items-center text-gray-600 hover:text-gray-800 dark:text-gray-200 dark:hover:text-gray-300",'data-turbo-method': :delete do %>
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="M5 11h8v2H5v3l-5-4l5-4zm-1 7h2.708a8 8 0 1 0 0-12H4a9.985 9.985 0 0 1 8-4c5.523 0 10 4.477 10 10s-4.477 10-10 10a9.985 9.985 0 0 1-8-4"/>
+                </svg>
+                <span class="font-bold">Logout</span>
+            <% end %>
+        </div>
+    </div>
+<%end%>
+    <div class="p-4">
+        <%= yield%>
+    </div>
+</div>

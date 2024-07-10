@@ -53,11 +53,17 @@
                                 </td>
                                 <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><%= candidate.address %></td>
                                  <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><%= candidate.phone %></td>
-                                  <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
-                                            <%= link_to rails_blob_path(candidate.resume, disposition: "inline"), target: "_blank" do %>
-                                              <%= "Resume" %>
-                                               <% end %>
-                                        </button></td>
+                                 <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+  <% candidate.resumes.each do |resume| %>
+    <button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+      <%= link_to rails_blob_path(resume, disposition: "inline"), target: "_blank" do %>
+        <%= "Resume" %>
+      <% end %>
+    </button>
+    <br>
+  <% end %>
+</td>
+
                                  <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
                                             <%= link_to "Edit", edit_candidate_path(candidate)%>
                                         </button></td>
