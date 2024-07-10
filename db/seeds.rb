@@ -78,7 +78,7 @@ candidates.each_with_index do |candidate_data, index|
     content_type: "image/jpg"
   )
 
-  candidate.resume.attach(
+  candidate.resumes.attach(
     io: File.open(candidate_data[:resume_path]),
     filename: "resume#{index + 1}.pdf",
     content_type: "application/pdf"
