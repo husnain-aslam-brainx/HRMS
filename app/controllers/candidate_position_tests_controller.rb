@@ -1,4 +1,5 @@
 class CandidatePositionTestsController < ApplicationController
+    before_action :authenticate_user!
     def index
         @candidate_position_tests = CandidatePositionTest.all
     end
