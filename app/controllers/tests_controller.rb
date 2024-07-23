@@ -17,10 +17,10 @@ class TestsController < ApplicationController
     def edit 
     end
     def update 
-        if @test.update(test_params)
-            redirect_to tests_path
+        if test_params[:assessment].present?
+            update_test(test_params)
         else
-            render :edit, status: :unprocessable_entity
+            update_test(test_params.except(:assessment))
         end
     end
     def destroy 
@@ -39,4 +39,9 @@ class TestsController < ApplicationController
     def set_test
         @test = Test.find(params[:id])
     end
+    def update_test(params)
+        if @test.update(params)
+            redirect_to tests_path
+        else 
+            render :edit, status: :unprocessable_entity
 end
