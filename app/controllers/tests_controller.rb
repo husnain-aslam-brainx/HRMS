@@ -44,4 +44,6 @@ class TestsController < ApplicationController
             redirect_to tests_path
         else 
             render :edit, status: :unprocessable_entity
+        end
+    end
 end
