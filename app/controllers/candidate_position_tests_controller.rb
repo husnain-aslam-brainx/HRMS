@@ -1,55 +1,48 @@
 class CandidatePositionTestsController < ApplicationController
-    before_action :authenticate_user!
+    include CandidatePositionTestsHelper
+    before_action :set_candidate_position_test, only: %i[edit update destroy]
+  
     def index
-        @candidate_position_tests = CandidatePositionTest.all
+      @candidate_position_tests = CandidatePositionTest.all.order(:created_at)
     end
-    def new 
-        @candidate_position_test = CandidatePositionTest.new
-        @candidates = Candidate.all
-        @tests = Test.all
-        @positions = Position.all
+  
+    def new
+      @candidate_position_test = CandidatePositionTest.new
     end
-    def create 
-        candidate = Candidate.find(candidate_position_test_params[:candidate])
-        test = Test.find(candidate_position_test_params[:test])
-        position = Position.find(candidate_position_test_params[:position])
-        @candidate_position_test = CandidatePositionTest.create(candidate: candidate,test: test,position: position,status: candidate_position_test_params[:status],result: candidate_position_test_params[:result])
-        if @candidate_position_test.save
-            redirect_to candidate_position_tests_path
-        else
-            render :new
-        end
-    end
-    def edit
-        @candidate_position_test = CandidatePositionTest.find(params[:id])
-        @candidates = Candidate.all
-        @positions = Position.all
-        @tests = Test.all
-      end
-    def update
-        @candidate_position_test = CandidatePositionTest.find(params[:id])
-        candidate = Candidate.find(candidate_position_test_id_params[:candidate_id])
-        test = Test.find(candidate_position_test_id_params[:test_id])
-        position = Position.find(candidate_position_test_id_params[:position_id])
-        if @candidate_position_test.update(candidate: candidate,test: test,position: position,status: candidate_position_test_id_params[:status],result: candidate_position_test_id_params[:result])
-            redirect_to candidate_position_tests_path
-        else
-          @candidates = Candidate.all
-          @positions = Position.all
-          @tests = Test.all
-          render :edit
-        end
-    end
-    def destroy 
-        @candidate_position_test = CandidatePositionTest.find(params[:id])
-        @candidate_position_test.destroy
+  
+    def create
+      @candidate_position_test = CandidatePositionTest.new(candidate_position_test_params)
+      if @candidate_position_test.save
         redirect_to candidate_position_tests_path
+      else
+        render :new, status: :unprocessable_entity
+      end
     end
-
+  
+    def edit
+    end
+  
+    def update
+      if @candidate_position_test.update(candidate_position_test_params)
+        redirect_to candidate_position_tests_path
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
+  
+    def destroy
+      @candidate_position_test.destroy
+      redirect_to candidate_position_tests_path
+    end
+  
+    private
+  
     def candidate_position_test_params
-        params.require(:candidate_position_test).permit(:candidate, :test, :position, :status, :result)
+      params.require(:candidate_position_test).permit(:candidate_id, :test_id, :position_id, :status, :result)
     end
-    def candidate_position_test_id_params
-        params.require(:candidate_position_test).permit(:candidate_id, :test_id, :position_id, :status, :result)
+  
+    def set_candidate_position_test
+      @candidate_position_test = CandidatePositionTest.find(params[:id])
     end
-end
+  end
+  
