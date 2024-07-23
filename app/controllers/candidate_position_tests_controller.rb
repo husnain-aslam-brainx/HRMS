@@ -31,8 +31,11 @@ class CandidatePositionTestsController < ApplicationController
     end
   
     def destroy
-      @candidate_position_test.destroy
+      if @candidate_position_test.destroy
       redirect_to candidate_position_tests_path
+      else
+        redirect_to candidate_position_tests_path, status: :unprocessable_entity
+      end
     end
   
     private
