@@ -10,8 +10,7 @@ class InterviewsController < ApplicationController
 
   def new
     @interview = Interview.new
-    @selected_position = position_params[:position] if position_params.present?
-    @selected_position ||= Position.first.title # Default to first position's title if position_params is nil or doesn't contain :position
+    @selected_position = params[:interview][:position].present? ? params[:interview][:position] : Position.first.title
     @candidate_position_tests = CandidatePositionTestFetcher.new(@selected_position).fetch
   end
 
@@ -55,11 +54,7 @@ class InterviewsController < ApplicationController
     params.require(:interview).permit(:candidate_position_test_id, :interviewer, :interview_type, :result)
   end
 
-  def position_params
-    params.require(:interview).permit(:position) if params[:interview]
-  end
+  def set_candidate_position_tests
 
-  def set_candidate_position_test
-    
   end
 end
