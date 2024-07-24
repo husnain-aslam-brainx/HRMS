@@ -1,19 +1,13 @@
 <div data-controller="submit-position-on-change">
-<button data-action="click->submit-position-on-change#alert">Alert</button>
   <%= form_with(model: interview, url: new_interview_path, method: :get, local: true) do |form| %>
-    <%= form.select :position, options_for_select(["SQA", "SE"], @default_position),{}, data: { action: "change->submit-position-on-change#submit" } %>
+    <%= form.select :position, options_for_select(["SQA", "SE"], @selected_position), {}, data: { action: "change->submit-position-on-change#submit" } %>
   <% end %>
 </div>
-
-
-
-
 
 <%= form_with(model: interview) do |form| %>
   <% if interview.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(interview.errors.count, "error") %> prohibited this interview from being saved:</h2>
-
       <ul>
         <% interview.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -22,11 +16,9 @@
     </div>
   <% end %>
 
-
   <div>
-    <%= form.label :candidate_position_test_id  ,style: "display: block" %>
-    <%= form.select :candidate_position_test_id, options_from_collection_for_select(@candidate_position_test || [],:id,:candidate_name) %>
-    
+    <%= form.label :candidate_position_test_id, style: "display: block" %>
+    <%= form.select :candidate_position_test_id, options_from_collection_for_select(@candidate_position_tests || [], :id, :candidate_name) %>
   </div>
 
   <div>
@@ -36,15 +28,15 @@
 
   <div>
     <%= form.label :interview_type, style: "display: block" %>
-    <%= form.select :interview_type, options_for_select(["initial","final"])  %>
+    <%= form.select :interview_type, options_for_select(["initial", "final"], interview.interview_type) %>
   </div>
-   <div>
-    <%= form.label :interview_type, style: "display: block" %>
-    <%= form.select :result, options_for_select(["passed","failed"])  %>
+
+  <div>
+    <%= form.label :result, style: "display: block" %>
+    <%= form.select :result, options_for_select(["passed", "failed"], interview.result) %>
   </div>
 
   <div>
     <%= form.submit %>
   </div>
 <% end %>
-
