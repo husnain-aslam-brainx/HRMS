@@ -1,13 +1,13 @@
 <tr>
-<td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><%= interview.candidate_position_test.candidate.name%></td>
-<td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><%= interview.interviewer %></td>
-<td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><%= interview.interview_type %></td>
-<td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><%= interview.result %></td>
-<td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+<td class="tbl-data"><%= interview.candidate_position_test.candidate.name%></td>
+<td class="tbl-data"><%= interview.interviewer %></td>
+<td class="tbl-data"><%= interview.interview_type %></td>
+<td class="tbl-data"><%= interview.result %></td>
+<td class="tbl-data"><button class="text-blue-500 tbl-link">
     <%= link_to "Edit", edit_interview_path(interview)%>
      </button></td>
-    <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-    <%= button_to "Delete", interview, method: :delete, class: "text-red-400 transition-colors duration-200 hover:text-indigo-500 focus:outline-none" %>
+    <td class="tbl-data">
+    <%= button_to "Delete", interview, method: :delete, class: "text-red-400 tbl-link" %>
     </td>
 </tr>
                            
