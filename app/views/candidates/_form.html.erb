@@ -1,0 +1,58 @@
+<%= form_with(model: candidate, multipart: true) do |form| %>
+  <div class="mx-32">
+    <div class="border border-gray-600 rounded-2xl p-12">
+      <h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-2">
+          <label for="first-name" class="input-label">Name</label>
+          <div class="mt-2">
+            <%= form.text_field :name, class: "form-input" %>
+          </div>
+        </div>
+        <div class="sm:col-span-1"></div>
+        <div class="sm:col-span-2">
+          <label for="last-name" class="input-label">Email</label>
+          <div class="mt-2">
+            <%= form.text_field :email, class: "form-input" %>
+          </div>
+        </div>
+        <div class="sm:col-span-2">
+          <label for="address" class="input-label">Address</label>
+          <div class="mt-2">
+            <%= form.text_field :address, class: "form-input" %>
+          </div>
+        </div>
+        <div class="sm:col-span-1"></div>
+        <div class="sm:col-span-2">
+          <label for="phone" class="input-label">Phone</label>
+          <div class="mt-2">
+            <%= form.text_field :phone, class: "form-input" %>
+          </div>
+        </div>
+        <div class="col-span-full">
+          <label for="photo" class="input-label">Photo</label>
+          <div class="mt-2 flex items-center gap-x-3">
+            <%= image_tag 'photo_icon.svg', class: 'h-12 w-12 text-gray-300' %>
+            <%= form.file_field :profile, class: "file-input" %>
+          </div>
+        </div>
+        <div class="col-span-full">
+          <label for="cover-photo" class=" input-label">Resume</label>
+          <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+            <div class="text-center">
+              <%= image_tag 'resume_icon.svg', class: 'mx-auto h-12 w-12 text-gray-300' %>
+              <div class="mt-4 ml-4 flex text-sm leading-6 text-gray-600">
+                <%= form.file_field :resumes, multiple: true %>
+              </div>
+              <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <%= link_to "Back", :back, class: "btn-back" %>
+          <%= form.submit "Submit", class: "btn-submit" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

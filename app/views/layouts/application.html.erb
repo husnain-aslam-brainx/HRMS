@@ -1,15 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="night">
   <head>
     <title>Hrms</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_importmap_tags %>
+   
   </head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+<div class="flex h-screen bg-gray-100">
+  <!-- sidebar -->
+  <% if user_signed_in?%>
+  <%= render "template"%>
+  <!-- Main content -->
+  <%= render "main"%>
+  <%else%>
+  <%= render "main" %>
+  <%end%>
+</body>
 </html>
+

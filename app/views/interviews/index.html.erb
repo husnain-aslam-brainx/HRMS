@@ -1,0 +1,43 @@
+<div class="flex justify-end">
+  <%= link_to "Create", new_interview_path, class: "btn-create" %>
+</div>
+
+<section class="container px-4 mx-auto">
+  <div class="flex flex-col">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+        <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+          <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead class="bg-gray-50 dark:bg-gray-800">
+              <tr>
+                <th scope="col" class="tbl-heading">
+                  Candidate's name
+                </th>
+                <th scope="col" class="tbl-heading">
+                  Interviewer
+                </th>
+                <th scope="col" class="tbl-heading">
+                  Type
+                </th>
+                <th scope="col" class="tbl-heading">
+                  Result
+                </th>
+                <th scope="col" class="tbl-heading">
+                  Edit
+                </th>
+                <th scope="col" class="tbl-heading">
+                  Delete
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+              <% @interviews.each do |interview| %>
+                <%= render "interview", interview: interview %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

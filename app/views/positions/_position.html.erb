@@ -1,0 +1,13 @@
+<tr>
+<td class="tbl-data"><%= position.description %></td>
+<td class="tbl-data"><%= position.title %></td>
+<td class="tbl-data"><%= position.status %></td>
+<td class="tbl-data"><button class="text-blue-500 tbl-link">
+    <%= link_to "Edit", edit_position_path(position)%>
+     </button></td>
+    <td class="tbl-data">
+    <%= button_to "Delete", position, method: :delete, class: "text-red-400 tbl-link" %>
+    </td>
+</tr>
+                           
+                        
