@@ -1,5 +1,5 @@
 class CandidatesController < ApplicationController
-    before_action :set_candidate, only: %i[show edit update destroy]
+    before_action :set_candidate, only: %i[edit update destroy]
     def index
         @candidates = Candidate.all.order("created_at")
     end
