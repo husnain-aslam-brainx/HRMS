@@ -1,10 +1,9 @@
 class CandidatesController < ApplicationController
-    before_action :authenticate_user!
+    before_action :set_candidate, only: %i[edit update destroy]
     def index
-        @candidates = Candidate.all
+        @candidates = Candidate.all.order("created_at")
     end
     def show 
-        @candidate = Candidate.find(params[:id])
     end
     def new
         @candidate = Candidate.new
@@ -12,38 +11,42 @@ class CandidatesController < ApplicationController
     def create
         @candidate = Candidate.new(candidate_params)
         if @candidate.save
-            if params[:candidate][:resumes]
-                params[:candidate][:resumes].each do |resume|
-                  @candidate.resumes.attach(resume)
-                end
-            end
             redirect_to candidates_path
         else 
-            render :new
+            render :new, status: :unprocessable_entity
         end 
     end
     def edit
-        @candidate = Candidate.find(params[:id])
     end
     def update
-        @candidate = Candidate.find(params[:id])
-        if @candidate.update(candidate_params)
-            redirect_to candidates_path
-        else 
-            render :edit
+        if candidate_params[:resumes].present?
+            update_candidate(candidate_params)
+        else
+            update_candidate(candidate_params.except(:resumes))
         end
     end
     def destroy 
-        @candidate = Candidate.find(params[:id])
-        @candidate.resumes.each do |resume|
-            resume.purge # This deletes the file from storage
-        end
         if @candidate.destroy
             redirect_to candidates_path
+        else
+            redirect_to candidates_path ,status: :unprocessable_entity
         end
     end
 
+    private
+
     def candidate_params
-        params.require(:candidate).permit(:name,:email,:address,:phone,:profile)
+        params.require(:candidate).permit(:name,:email,:address,:phone,:profile,resumes: [])
     end
+    def set_candidate
+        @candidate = Candidate.find(params[:id])
+    end
+    def update_candidate(params)
+        if @candidate.update(params)
+            redirect_to candidates_path
+        else
+            render :edit, status: :unprocessable_entity
+        end
+    end
+
 end

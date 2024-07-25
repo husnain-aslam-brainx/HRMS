@@ -1,7 +1,7 @@
 class TestsController < ApplicationController 
-    before_action :authenticate_user!
+    before_action :set_test, only: %i[edit update destroy]
     def index 
-        @tests = Test.all 
+        @tests = Test.all.order("created_at")
     end
     def new  
         @test = Test.new
@@ -11,27 +11,39 @@ class TestsController < ApplicationController
         if @test.save 
             redirect_to tests_path
         else
-            render :new
+            render :new, status: :unprocessable_entity
         end
     end
     def edit 
-        @test = Test.find(params[:id])
     end
     def update 
-        @test = Test.find(params[:id])
-        if @test.update(test_params)
-            redirect_to tests_path
+        if test_params[:assessment].present?
+            update_test(test_params)
         else
-            render :edit
+            update_test(test_params.except(:assessment))
         end
     end
     def destroy 
-        @test = Test.find(params[:id])
-        @test.destroy
-        redirect_to tests_path
+        if @test.destroy
+            redirect_to tests_path
+        else
+            redirect_to  tests_path, status: :unprocessable_entity
+        end
     end
     
+    private
+
     def test_params
         params.require(:test).permit(:description,:assessment)
+    end
+    def set_test
+        @test = Test.find(params[:id])
+    end
+    def update_test(params)
+        if @test.update(params)
+            redirect_to tests_path
+        else 
+            render :edit, status: :unprocessable_entity
+        end
     end
 end

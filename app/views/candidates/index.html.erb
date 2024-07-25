@@ -1,86 +1,65 @@
-<div class=" flex justify-end">
-<%= link_to "Create", new_candidate_path , class:" text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800  font-medium rounded-lg text-sm px-2.5 py-2.5 text-center me-5 mb-2 "%>
+<div class="flex justify-end">
+  <%= link_to "Create", new_candidate_path, class: "btn-create" %>
 </div>
+
 <section class="container px-4 mx-auto">
-    <div class="flex flex-col">
-        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead class="bg-gray-50 dark:bg-gray-800">
-                            <tr>
-                            
-
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    Candidates
-                                </th>
-
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    Address
-                                </th>
-
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    Phone
-                                </th>
-
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                   Resume
-                                </th>
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                   Edit
-                                </th>
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                   Delete
-                                </th>
-
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                        <% @candidates.each do |candidate| %>
-                            <tr>
-                                <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                    <div class="flex items-center gap-x-2">
-                                      <%# <div class="object-cover w-12 h-12 rounded-full" >
-                                        <%= image_tag candidate.profile %>
-                                       <%= image_tag candidate.profile, class: "rounded-full h-12 w-12" %>
-
-
-                                        <div>
-                                            <h2 class="text-sm font-medium text-gray-800 dark:text-white "><%= candidate.name%></h2>
-                                            <p class="text-xs font-normal text-gray-600 dark:text-gray-400"><%= candidate.email%></p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><%= candidate.address %></td>
-                                 <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><%= candidate.phone %></td>
-                                 <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-  <% candidate.resumes.each do |resume| %>
-    <button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
-      <%= link_to rails_blob_path(resume, disposition: "inline"), target: "_blank" do %>
-        <%= "Resume" %>
-      <% end %>
-    </button>
-    <br>
-  <% end %>
-</td>
-
-                                 <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
-                                            <%= link_to "Edit", edit_candidate_path(candidate)%>
-                                        </button></td>
-                                 <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            <%= button_to "Delete", candidate, method: :delete, class: "text-red-400 transition-colors duration-200 hover:text-indigo-500 focus:outline-none" %>
-                                        </td>
-                            </tr>
-                            <%end%>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+  <div class="flex flex-col">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+        <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+          <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead class="bg-gray-50 dark:bg-gray-800">
+              <tr>
+                <th scope="col" class="tbl-heading">Candidates</th>
+                <th scope="col" class="tbl-heading">Address</th>
+                <th scope="col" class="tbl-heading">Phone</th>
+                <th scope="col" class="tbl-heading">Resume</th>
+                <th scope="col" class="tbl-heading">Edit</th>
+                <th scope="col" class="tbl-heading">Delete</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+              <% @candidates.each do |candidate| %>
+                <tr>
+                  <td class="tbl-data">
+                    <div class="flex items-center gap-x-2">
+                      <%= image_tag candidate.profile, class: "rounded-full h-12 w-12" %>
+                      <div>
+                        <h2 class="text-sm font-medium text-gray-800 dark:text-white">
+                          <%= candidate.name %>
+                        </h2>
+                        <p class="text-xs font-normal text-gray-600 dark:text-gray-400">
+                          <%= candidate.email %>
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="tbl-data"><%= candidate.address %></td>
+                  <td class="tbl-data"><%= candidate.phone %></td>
+                  <td class="tbl-data">
+                    <% candidate.resumes.each do |resume| %>
+                      <button class="text-blue-500 tbl-link">
+                        <%= link_to rails_blob_path(resume, disposition: "inline"), target: "_blank" do %>
+                          <%= "Resume" %>
+                        <% end %>
+                      </button>
+                      <br>
+                    <% end %>
+                  </td>
+                  <td class="tbl-data">
+                    <button class="text-blue-500 tbl-link">
+                      <%= link_to "Edit", edit_candidate_path(candidate) %>
+                    </button>
+                  </td>
+                  <td class="tbl-data">
+                    <%= button_to "Delete", candidate, method: :delete, class: "text-red-400 tbl-link" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
-
-
-    
-   
-    </div>
+  </div>
 </section>

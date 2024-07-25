@@ -1,7 +1,7 @@
 class PositionsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :set_position, only: %i[edit update destroy] 
     def index
-        @positions = Position.all
+        @positions = Position.all.order("created_at")
     end
     def new
         @position = Position.new
@@ -11,27 +11,32 @@ class PositionsController < ApplicationController
         if @position.save 
             redirect_to positions_path, notice: "added"
         else
-            render :new
+            render :new, status: :unprocessable_entity
         end
     end
     def edit 
-        @position = Position.find(params[:id])
     end
     def update 
-        @position = Position.find(params[:id])
         if @position.update(position_params)
             redirect_to positions_path, notice: "updated"
         else
-            render :index
+            render :index, status: :unprocessable_entity
         end
     end
     def destroy
-        @position = Position.find(params[:id])
-        @position.destroy
+        if @position.destroy
         redirect_to positions_path, notice: "Position was successfully deleted."
+        else
+            redirect_to positions_path,   status: :unprocessable_entity
+        end
     end
+
+    private
 
     def position_params
         params.require(:position).permit(:description,:title,:status,:id)
+    end
+    def set_position
+        @position = Position.find(params[:id])
     end
 end
