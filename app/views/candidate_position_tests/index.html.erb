@@ -1,59 +1,33 @@
-<div class=" flex justify-end">
-<%= link_to "Create", new_candidate_position_test_path , class:" text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800  font-medium rounded-lg text-sm px-2.5 py-2.5 text-center me-5 mb-2 "%>
+<div class="flex justify-end">
+  <%= link_to "Create", new_candidate_position_test_path, class: "btn-create" %>
 </div>
+
 <section class="container px-4 mx-auto">
-    <div class="flex flex-col">
-        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead class="bg-gray-50 dark:bg-gray-800">
-                            <tr>
-                            
-
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    Candidates
-                                </th>
-
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    Resume
-                                </th>
-
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    Test
-                                </th>
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                   Position
-                                </th>
-
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                   Status
-                                </th>
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                   Result
-                                </th>
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                   Edit
-                                </th>
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                   Delete
-                                </th>
-
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                        <% @candidate_position_tests.each do |candidate_position_test| %>
-                            <%= render "candidate_position_test", candidate_position_test: candidate_position_test%>
-                            <%end%>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+  <div class="flex flex-col">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+        <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+          <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead class="bg-gray-50 dark:bg-gray-800">
+              <tr>
+                <th scope="col" class="tbl-heading">Candidates</th>
+                <th scope="col" class="tbl-heading">Resume</th>
+                <th scope="col" class="tbl-heading">Test</th>
+                <th scope="col" class="tbl-heading">Position</th>
+                <th scope="col" class="tbl-heading">Status</th>
+                <th scope="col" class="tbl-heading">Result</th>
+                <th scope="col" class="tbl-heading">Edit</th>
+                <th scope="col" class="tbl-heading">Delete</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+              <% @candidate_position_tests.each do |candidate_position_test| %>
+                <%= render "candidate_position_test", candidate_position_test: candidate_position_test %>
+              <% end %>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
-
-
-    
-   
-    </div>
+  </div>
 </section>
