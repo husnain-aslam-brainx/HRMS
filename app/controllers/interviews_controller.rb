@@ -1,9 +1,8 @@
 class InterviewsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_interview, only: %i[ show edit update destroy ]
+  before_action :set_interview, only: %i[show edit update destroy]
 
   def index
-    @interviews = Interview.all
+    @interviews = Interview.all.order("created_at")
   end
 
   def show
@@ -11,61 +10,51 @@ class InterviewsController < ApplicationController
 
   def new
     @interview = Interview.new
-    @default_position = "SE"
-    @candidate_position_test 
-    if params[:interview] && params[:interview][:position]
-      @default_position = params[:interview][:position]
-      puts "Position: #{params[:interview][:position]}"
-      @candidate_position_test = CandidatePositionTest.where(result: "pass").joins(:candidate).select('candidate_position_tests.*, candidates.name AS candidate_name')
-      @candidate_position_test = @candidate_position_test.where(position_id: Position.where(title: params[:interview][:position]))
-    end
-    puts @candidate_position_test.inspect
+    @selected_position = params[:interview][:position].present? ? params[:interview][:position] : Position.first.title
+    @candidate_position_tests = CandidatePositionTestFetcher.new(@selected_position).fetch
   end
 
   def edit
+    @selected_position = @interview.candidate_position_test&.position&.title
+    @candidate_position_tests = CandidatePositionTestFetcher.new(@selected_position).fetch
   end
 
   def create
     @interview = Interview.new(interview_params)
-
-
-    respond_to do |format|
-      if @interview.save
-        format.html { redirect_to interview_url(@interview), notice: "Interview was successfully created." }
-        format.json { render :show, status: :created, location: @interview }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @interview.errors, status: :unprocessable_entity }
-      end
+    if @interview.save
+      redirect_to interviews_path
+    else
+      render :new, status: :unprocessable_entity 
     end
   end
-
 
   def update
-    respond_to do |format|
-      if @interview.update(interview_params)
-        format.html { redirect_to interview_url(@interview), notice: "Interview was successfully updated." }
-        format.json { render :show, status: :ok, location: @interview }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @interview.errors, status: :unprocessable_entity }
-      end
+    if @interview.update(interview_params)
+      redirect_to interviews_path
+    else
+      render :edit, status: :unprocessable_entity 
     end
   end
 
-
   def destroy
-    @interview.destroy
-    redirect_to interviews_path
+    if @interview.destroy
+      redirect_to interviews_path
+    else
+      redirect_to interviews_path, status: :unprocessable_entity
+    end
   end
 
   private
 
-    def set_interview
-      @interview = Interview.find(params[:id])
-    end
+  def set_interview
+    @interview = Interview.find(params[:id])
+  end
 
-    def interview_params
-      params.require(:interview).permit(:candidate_position_test_id, :interviewer, :interview_type,:result)
-    end
+  def interview_params
+    params.require(:interview).permit(:candidate_position_test_id, :interviewer, :interview_type, :result)
+  end
+
+  def set_candidate_position_tests
+
+  end
 end
